@@ -56,7 +56,7 @@
                         <span>预约时间：星期{{getDayByNum(detail.weekDays)}}</span>&nbsp;&nbsp;
                         <span>预约节次：{{detail.classNum}}</span>&nbsp;&nbsp;
                          <span>预约周次：{{detail.orderWeek}}</span>&nbsp;&nbsp;
-                        <a *ngIf="detail.type==1" style="float: right" (click)="update(data[id])">编辑</a>
+                        <a *ngIf="detail.type==1" style="float: right" (click)="update(data)">编辑</a>
                     </span>
         </nz-alert>
         <nz-table #nzTable [nzDataSource]="detail.lab"  [nzIsPagination]="false">

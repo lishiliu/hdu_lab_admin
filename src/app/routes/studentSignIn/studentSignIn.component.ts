@@ -18,9 +18,10 @@ export class StudentSignInComponent implements OnInit {
     }
     validateForm: FormGroup;
     apiUrl = [
-        'class/semester/getThisWeekClassByUsername', /*0获取本周课程*/
+        'class/lab/getClassByLabId', /*0获取本周课程*/
         'studentSignIn/updateStatus', /*1删除课程*/
         'semester/getNowSemester', // 2
+        'user/getUserByUserName',
     ];
     options = [
         { value: '2016', label: '2016' },
@@ -68,9 +69,21 @@ export class StudentSignInComponent implements OnInit {
         // 获取当前学期信息
         this.getSemester();
         // 获取课程
-        this.studentSignInService.executeHttp(this.apiUrl[0], {userName: this._storage.get('username')})
+        this.studentSignInService.executeHttp(this.apiUrl[0], {labId: this._storage.get('labId')})
             .then((result: any) => {
-                this.courses = JSON.parse(result['_body'])['course'];
+                const data = JSON.parse(result['_body'])['course'];
+                for (let i of data) {
+                    i.expand = false;
+                    // 获取教师信息
+                    this.studentSignInService.executeHttp(this.apiUrl[3], {userName: i.userName})
+                        .then((res: any) => {
+                            let temp = JSON.parse(res['_body'])['User1'];
+                            i.userNickname = temp.userNickname;
+                            i.email = temp.email;
+                            i.phone = temp.phone;
+                        });
+                }
+                this.courses = data;
             });
     }
     // 查看学生记录
@@ -78,33 +91,6 @@ export class StudentSignInComponent implements OnInit {
         const str = JSON.stringify(data);
         this._storage.set('signInCourse', str);
         this.router.navigate(['/studentSignIn/show']);
-    }
-    // 添加学生
-    addStudent(data: any) {
-        const str = JSON.stringify(data);
-        this._storage.set('addStudentClass', str);
-        this.router.navigate(['/studentSignIn/add']);
-    }
-    // 开始签到
-    private startSign(data: any) {
-        this.studentSignInService.executeHttp(this.apiUrl[1], data)
-            .then((result: any) => {
-                const res = JSON.parse(result['_body']);
-                if (res['result'] === 1) {
-                    this.success();
-                    this._getData();
-                }
-            });
-    }
-    success = () => {
-        const modal = this.confirmServ.success({
-            title: '发布签到成功',
-            content: '1秒后刷新'
-        });
-        const Route = this.router;
-        setTimeout(function () {
-            modal.destroy();
-        }, 1000);
     }
     // 获取历史课程
     currentModal;

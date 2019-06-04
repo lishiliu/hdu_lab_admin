@@ -18,7 +18,7 @@ export class HistoricalRecordsComponent implements OnInit {
     }
     validateForm: FormGroup;
     apiUrl = [
-        'http://localhost:8080/LabManager/class/semester/getclassbyusername', /*0获取课程*/
+        'http://localhost:8080/LabManager/class/lab/getClassByLabIdAndSemester', /*0获取课程*/
         'http://localhost:8080/LabManager/semester/getNowSemester', // 1
     ];
 
@@ -70,7 +70,7 @@ export class HistoricalRecordsComponent implements OnInit {
         this.getSemester();
         // 获取课程
         let data = {
-            userName: this._storage.get('username'),
+            labId: this._storage.get('labId'),
             semester: this.searchSemester
         }
         this.historicalRecordsService.executeHttp(this.apiUrl[0], data)

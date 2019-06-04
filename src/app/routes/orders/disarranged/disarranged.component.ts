@@ -129,8 +129,14 @@ export class DisarrangedComponent implements OnInit {
     }
     // 修改志愿1
     private update(data: any) {
-        console.log(data);
-        this.router.navigate(['/alter', data.type]);
+        this._storage.remove('orderDetail');
+        const nav = this.router;
+        this.DisarrangedService.executeHTTP(this.apiUrl[2], {id: data.id })
+            .then((result: any) => {
+                const _orderDetail = JSON.parse(result['_body'])['Order'];
+                this._storage.set('orderDetail', JSON.stringify(_orderDetail));
+                nav.navigate(['/arranged/edit']);
+            });
     }
 
     ngOnInit(): void {
