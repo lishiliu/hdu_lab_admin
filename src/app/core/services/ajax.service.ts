@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions} from '@angular/http';
 import {SessionStorageService} from '@core/storage/storage.service';
-const host = 'http://aliyun.charlesxu.cn:8080/LabManager/';
+const host = 'http://localhost:8080/LabManager/';
 
 @Injectable()
 export class AjaxService {
