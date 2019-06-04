@@ -12,6 +12,10 @@ import {ProfileComponent} from './profile/profile.component';
 import {passwordEditComponent} from './passwordEdit/passwordEdit.component';
 import {OrderDetailComponent} from './orders/orderDetail/orderDetail.component';
 import {HistoricalOrdersComponent} from './orders/historicalOrders/historicalOrders.component';
+import {StudentSignInComponent} from './studentSignIn/studentSignIn.component';
+import {HistoricalRecordsComponent} from './studentSignIn/historicalRecords/historicalRecords.component';
+import {AddStudentComponent} from './studentSignIn/addStudent/addStudent.component';
+import {ShowStudentSignRecordComponent} from './studentSignIn/showStudentSignRecord/showStudentSignRecord.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent, canLoad: [CanAuthProvide]},
@@ -61,6 +65,29 @@ export const routes: Routes = [
                 path: 'passwordEdit', component: passwordEditComponent, canActivate: [CanAuthProvide],
                 data: {
                     breadcrumb: '密码修改'
+                }
+            }, {
+                path: 'studentSignIn', component: StudentSignInComponent, canActivate: [CanAuthProvide],
+                data: {
+                    breadcrumb: '学生签到管理'
+                }
+            },
+            {
+                path: 'studentSignIn/history', component: HistoricalRecordsComponent, canActivate: [CanAuthProvide],
+                data: {
+                    breadcrumb: '历史签到记录'
+                }
+            },
+            {
+                path: 'studentSignIn/add', component: AddStudentComponent, canActivate: [CanAuthProvide],
+                data: {
+                    breadcrumb: '添加学生'
+                }
+            },
+            {
+                path: 'studentSignIn/show', component: ShowStudentSignRecordComponent, canActivate: [CanAuthProvide],
+                data: {
+                    breadcrumb: '查看签到记录'
                 }
             },
             {path: '', redirectTo: 'index', pathMatch: 'full'}

@@ -1,5 +1,5 @@
 {
-  "name": "hdu-elab-antd",
+  "name": "hdu_lab_admin",
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
@@ -61,14 +61,14 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "description": "[HDU-elab-antd](https://github.com/ousc/HDU-elab-antd)是基于[ng-zorro-antd](https://github.com/NG-ZORRO/ng-zorro-antd)的机房预约系统。",
+  "description": "[hdu_lab-admin](https://github.com/lishiliu/hdu_lab-admin)是基于[ng-zorro-antd](https://github.com/NG-ZORRO/ng-zorro-antd)的机房预约系统。",
   "main": "karma.conf.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ousc/hdu-elab-antd.git"
+    "url": "git+https://github.com/lishiliu/hdu_lab-admin.git"
   },
   "bugs": {
-    "url": "https://github.com/ousc/hdu-elab-antd/issues"
+    "url": "https://github.com/lishiliu/hdu_lab-admin/issues"
   },
-  "homepage": "https://github.com/ousc/hdu-elab-antd#readme"
+  "homepage": "https://github.com/lishiliu/hdu_lab-admin#readme"
 }

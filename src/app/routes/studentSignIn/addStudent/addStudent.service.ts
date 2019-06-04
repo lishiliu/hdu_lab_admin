@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {SessionStorageService} from '@core/storage/storage.module';
+import {SessionStorageService} from 'app/core/storage/storage.module';
 import {Headers, Http, RequestOptions} from '@angular/http';
 const host = 'http://localhost:8080/LabManager/';
 
+
 @Injectable()
-export class LoginService {
-    constructor(private _storage: SessionStorageService, private http: Http) {
+export class AddStudentService {
+    constructor(private _storage: SessionStorageService, private http:Http) {
     }
     executeGET(curl: any) {
         let headers = new Headers({'Content-Type': 'application/json', 'charset': 'utf-8'});
@@ -17,7 +18,7 @@ export class LoginService {
                 });
         });
     }
-    executeHTTP( curl: any, data: any) {
+    executeHttp( curl: any, data: any) {
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers});
         let content = JSON.stringify(data);
@@ -29,5 +30,3 @@ export class LoginService {
         });
     }
 }
-
-

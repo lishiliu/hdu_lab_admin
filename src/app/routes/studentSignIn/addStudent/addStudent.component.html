@@ -1,0 +1,85 @@
+<div nz-row>
+  <div nz-col>
+    <h1>添加学生</h1>
+  </div>
+</div>
+<br>
+<div nz-row>
+  <div nz-col>
+    <p>当前学期：{{nowSemester.nowSemester}}</p>
+  </div>
+</div>
+<br><br><br>
+<div nz-row>
+  <div nz-col></div>
+</div>
+<div nz-row>
+  <form [nzLayout]="'horizontal'" nz-form [formGroup]="validateForm" (ngSubmit)="'_submitForm()'" nz-col [nzOffset]="'5'" nzSpan="10">
+    <div class="formItem" nz-form-item>
+      <div nz-form-control>
+        <label  nz-col nzSpan="16"></label>
+        <div nz-col nzSpan="16">
+          <nz-alert [nzType]="'warning'" nzShowIcon>
+                          <span alert-body>
+                            <pre style="font-size: 1.4em;color: red">请在第一周开始前输入教务系统中的该课程的学生,谢谢.</pre>
+                          </span>
+          </nz-alert>
+        </div>
+      </div>
+    </div>
+    <div class="formItem" nz-form-item>
+      <div nz-form-control [nzValidateStatus]="validateForm.controls.addClassId"  [nzValidateStatus]="getFormControl('addClassId')"  nzHasFeedback >
+        <label for="addClassId" nz-col nzSpan="7">课程号：</label>
+        <div nz-col nzSpan="15">
+          <nz-input id="addClassId" formControlName="addClassId" [(ngModel)]="addStudentCourse.classId" ></nz-input>
+        </div>
+        <div class="help">
+          <div nz-col nzSpan="12" [nzOffset]="'7'" nz-form-explain *ngIf="validateForm.controls.addClassId.dirty&&validateForm.controls.addClassId.hasError('required')">课程号为必选项！</div>
+        </div>
+      </div>
+    </div>
+    <div class="formItem" nz-form-item>
+      <div nz-form-control [nzValidateStatus]="validateForm.controls.addClassName"  [nzValidateStatus]="getFormControl('addClassName')"  nzHasFeedback >
+        <label for="addClassName" nz-col nzSpan="7">课程名称：</label>
+        <div nz-col nzSpan="15">
+          <nz-input id="addClassName" formControlName="addClassName" [(ngModel)]="addStudentCourse.className"></nz-input>
+        </div>
+        <div class="help">
+          <div nz-col nzSpan="12" [nzOffset]="'7'" nz-form-explain *ngIf="validateForm.controls.addClassName.dirty&&validateForm.controls.addClassName.hasError('required')">课程名为必选项！</div>
+        </div>
+      </div>
+    </div>
+    <div class="formItem" nz-form-item>
+      <div nz-form-control [nzValidateStatus]="validateForm.controls.addStudentId"  [nzValidateStatus]="getFormControl('addStudentId')"  nzHasFeedback >
+        <label for="addStudentId" nz-col nzSpan="7">学号：</label>
+        <div nz-col nzSpan="15">
+          <nz-input id="addStudentId" formControlName="addStudentId" [nzPlaceHolder]="'请输入学号'" ></nz-input>
+        </div>
+        <div class="help">
+          <div nz-col nzSpan="12" [nzOffset]="'7'" nz-form-explain *ngIf="validateForm.controls.addStudentId.dirty&&validateForm.controls.addStudentId.hasError('required')">学号为必填项！</div>
+        </div>
+      </div>
+    </div>
+    <div class="formItem" nz-form-item>
+      <div nz-form-control [nzValidateStatus]="validateForm.controls.addStudentName"  [nzValidateStatus]="getFormControl('addStudentName')"  nzHasFeedback >
+        <label for="addStudentName" nz-col nzSpan="7">姓名：</label>
+        <div nz-col nzSpan="15">
+          <nz-input id="addStudentName" formControlName="addStudentName" [nzPlaceHolder]="'请输入学生姓名'" ></nz-input>
+        </div>
+        <div class="help">
+          <div nz-col nzSpan="12" [nzOffset]="'7'" nz-form-explain *ngIf="validateForm.controls.addStudentName.dirty&&validateForm.controls.addStudentName.hasError('required')">姓名为必填项！</div>
+        </div>
+      </div>
+    </div>
+    <div class="submitBtn" nz-form-item nz-col nzSpan="22">
+      <div nz-form-control>
+        <button nz-button [nzType]="'danger'" [nzSize]="'large'" type="reset" onclick="window.history.back()">
+          <span>取消</span>
+        </button>
+        <nz-popconfirm [nzTitle]="'确定提交吗？'" (nzOnConfirm)="_submitForm()" (nzOnCancel)="null">
+          <button nz-button nz-popconfirm [nzLoading]="loadStatus" [nzType]="'primary'" [nzSize]="'large'" >{{submitBtn}}</button>
+        </nz-popconfirm>
+      </div>
+    </div>
+  </form>
+</div>

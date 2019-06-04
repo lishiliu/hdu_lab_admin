@@ -1,7 +1,7 @@
 import {SessionStorageService} from '@core/storage/storage.module';
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
-const host = "http://aliyun.charlesxu.cn:8080/LabManager/";
+const host = 'http://localhost:8080/LabManager/';
 
 @Injectable()
 export class PasswordEditService {

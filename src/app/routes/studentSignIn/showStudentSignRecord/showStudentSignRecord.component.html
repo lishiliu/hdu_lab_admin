@@ -1,0 +1,61 @@
+<div nz-row>
+    <h1>学生签到记录</h1>
+</div>
+<div nz-row>
+    <div nz-col [nzSpan]="22">
+        <p>当前学期：<span>{{nowSemester.nowSemester}}</span></p>
+        <p>当前课程：<span>{{signInCourse.className}}</span></p>
+    </div>
+    <div nz-col [nzSpan]="1" style="margin-left: -2em">
+        <button nz-button [nzType]="'primary'" [nzSize]="'large'" onclick="window.history.back()">
+            <span>返回</span>
+        </button>
+    </div>
+</div>
+<div nz-row class="mycard" [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'">
+    <div nz-col [nzSpan]="8">
+        <p>总人数</p>
+        <p>{{signRecords.length}}人</p>
+    </div>
+    <div nz-col [nzSpan]="8" class="se">
+        <p>已签到</p>
+        <p>{{doCount}}人</p>
+    </div>
+    <div nz-col [nzSpan]="8">
+        <p>未签到</p>
+        <p>{{undoCount}}人</p>
+    </div>
+</div>
+<br>
+<div nz-row [nzType]="'flex'" [nzJustify]="'start'">
+    <div nz-col [nzSpan]="24">
+        <nz-table #nzTable [nzDataSource]="signRecords" [nzPageSize]="5" [nzShowSizeChanger]="true" [nzShowTotal]="true" [nzTotal]="signRecords.length">
+            <thead nz-thead>
+            <tr>
+                <th nz-th><span>学号</span></th>
+                <th nz-th><span>姓名</span></th>
+                <th nz-th><span>班级</span></th>
+                <th nz-th><span>专业</span></th>
+                <th nz-th><span>学院</span></th>
+                <th nz-th><span>年级</span></th>
+                <th nz-th><span>状态</span></th>
+                <th nz-th><span>座位号</span></th>
+                <th nz-th><span>实验室</span></th>
+            </tr>
+            </thead>
+            <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                <td nz-td>{{data.studentId}}</td>
+                <td nz-td>{{data.studentName}}</td>
+                <td nz-td>{{data.classNo}}</td>
+                <td nz-td>{{data.majorIn}}</td>
+                <td nz-td>{{data.college}}</td>
+                <td nz-td>{{data.gradeNo}}</td>
+                <td nz-td>{{data.statusString}}</td>
+                <td nz-td>{{data.computerNo}}</td>
+                <td nz-td>{{data.labName}}</td>
+            </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>

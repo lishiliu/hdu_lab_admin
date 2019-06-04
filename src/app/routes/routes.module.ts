@@ -8,7 +8,7 @@ import {CalendarModule} from './calendar/calendar.module';
 import {OrdersModule} from './orders/orders.module';
 import {passwordEditModule} from './passwordEdit/passwordEdit.module';
 import {ProfileModule} from './profile/profile.module';
-
+import {StudentSignInModule} from './studentSignIn/studentSignIn.module';
 
 @NgModule({
     imports: [
@@ -21,7 +21,8 @@ import {ProfileModule} from './profile/profile.module';
         ProfileModule,
         LoginModule,
         CalendarModule,
-        OrdersModule
+        OrdersModule,
+        StudentSignInModule
     ]
 })
 
