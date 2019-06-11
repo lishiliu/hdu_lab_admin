@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SessionStorageService} from '@core/storage/storage.module';
 import {Http, Headers, RequestOptions} from '@angular/http';
-const host = 'http://localhost:8080/LabManager/';
+const host = 'http://www.mrzhao14.cn/LabManager/';
 
 @Injectable()
 export class DisarrangedService {

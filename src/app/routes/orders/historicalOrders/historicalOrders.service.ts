@@ -1,7 +1,7 @@
 import {SessionStorageService} from '@core/storage/storage.module';
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions} from '@angular/http';
-const host = 'http://localhost:8080/LabManager/';
+const host = 'http://www.mrzhao14.cn/LabManager/';
 
 @Injectable()
 export class HistoricalOrdersService {
