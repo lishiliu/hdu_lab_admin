@@ -2,9 +2,14 @@
     <h1>学生签到记录</h1>
 </div>
 <div nz-row>
-    <div nz-col [nzSpan]="22">
-        <p>当前学期：<span>{{nowSemester.nowSemester}}</span></p>
+    <div *ngIf="!searchFlag" nz-col [nzSpan]="22">
+        <p>当前学期：<span>{{nowSemester}}</span></p>
         <p>当前课程：<span>{{signInCourse.className}}</span></p>
+    </div>
+    <div *ngIf="searchFlag" nz-col [nzSpan]="22">
+        <p>查询学期：<span>{{searchSemester}}</span></p>
+        <p>查询周次：<span>{{searchWeek}}</span></p>
+        <p>查询课程：<span>{{signInCourse.className}}</span></p>
     </div>
     <div nz-col [nzSpan]="1" style="margin-left: -2em">
         <button nz-button [nzType]="'primary'" [nzSize]="'large'" onclick="window.history.back()">

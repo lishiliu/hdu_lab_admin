@@ -3,7 +3,7 @@
 </div>
 <div nz-row>
   <div nz-col [nzSpan]="22">
-    <p>当前学期：<span>{{nowSemester.nowSemester}}</span></p>
+    <p>当前学期：<span>{{nowSemester}}</span></p>
   </div>
   <div nz-col [nzSpan]="1" style="margin-left: -2em">
     <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="showModalForTemplate(title, content, footer)">
@@ -16,7 +16,7 @@
       <form nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
         <div nz-form-item nz-row>
           <div nz-form-label nz-col [nzSpan]="6">
-            <label nz-form-item-required>选择学期：</label>
+            <label nz-form-item-required>选择学期</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="4">
             <nz-select formControlName="fy" [nzSize]="'large'">
@@ -38,6 +38,33 @@
             <nz-select formControlName="type" [nzSize]="'large'">
               <nz-option [nzLabel]="1" [nzValue]="1"></nz-option>
               <nz-option [nzLabel]="2" [nzValue]="2"></nz-option>
+            </nz-select>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="3">
+            <span>&nbsp;&nbsp;周 次：</span>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="3">
+            <nz-select formControlName="weekNo" [nzSize]="'large'">
+              <nz-option [nzLabel]="1" [nzValue]="1"></nz-option>
+              <nz-option [nzLabel]="2" [nzValue]="2"></nz-option>
+              <nz-option [nzLabel]="3" [nzValue]="3"></nz-option>
+              <nz-option [nzLabel]="4" [nzValue]="4"></nz-option>
+              <nz-option [nzLabel]="5" [nzValue]="5"></nz-option>
+              <nz-option [nzLabel]="6" [nzValue]="6"></nz-option>
+              <nz-option [nzLabel]="7" [nzValue]="7"></nz-option>
+              <nz-option [nzLabel]="8" [nzValue]="8"></nz-option>
+              <nz-option [nzLabel]="9" [nzValue]="9"></nz-option>
+              <nz-option [nzLabel]="10" [nzValue]="10"></nz-option>
+              <nz-option [nzLabel]="11" [nzValue]="11"></nz-option>
+              <nz-option [nzLabel]="12" [nzValue]="12"></nz-option>
+              <nz-option [nzLabel]="13" [nzValue]="13"></nz-option>
+              <nz-option [nzLabel]="14" [nzValue]="14"></nz-option>
+              <nz-option [nzLabel]="15" [nzValue]="15"></nz-option>
+              <nz-option [nzLabel]="16" [nzValue]="16"></nz-option>
+              <nz-option [nzLabel]="17" [nzValue]="17"></nz-option>
+              <nz-option [nzLabel]="18" [nzValue]="18"></nz-option>
+              <nz-option [nzLabel]="19" [nzValue]="19"></nz-option>
+              <nz-option [nzLabel]="20" [nzValue]="20"></nz-option>
             </nz-select>
           </div>
         </div>

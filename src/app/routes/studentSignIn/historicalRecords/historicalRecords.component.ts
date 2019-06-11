@@ -18,7 +18,7 @@ export class HistoricalRecordsComponent implements OnInit {
     }
     validateForm: FormGroup;
     apiUrl = [
-        'http://www.mrzhao14.cn/LabManager/class/lab/getClassByLabIdAndSemester', /*0获取课程*/
+        'http://www.mrzhao14.cn/LabManager/class/lab/getClassByLabIdAndSemesterAndWeek', /*0获取课程*/
         'http://www.mrzhao14.cn/LabManager/semester/getNowSemester', // 1
     ];
 
@@ -29,6 +29,7 @@ export class HistoricalRecordsComponent implements OnInit {
     data = [];
     // 获取学期
     searchSemester = this._storage.get('historyCourses');
+    selectWeek = this._storage.get('selectWeek');
     nowSemester = {
         nowSemester: '',
         maxWeek: 17
@@ -63,6 +64,7 @@ export class HistoricalRecordsComponent implements OnInit {
     showHistoryRecords(data: any) {
         const str = JSON.stringify(data);
         this._storage.set('signInCourse', str);
+        this._storage.set('historyOrThisWeek', 1);
         this.router.navigate(['/studentSignIn/show']);
     }
     private _getData = () => {
@@ -71,7 +73,8 @@ export class HistoricalRecordsComponent implements OnInit {
         // 获取课程
         let data = {
             labId: this._storage.get('labId'),
-            semester: this.searchSemester
+            semester: this.searchSemester,
+            selectWeek: this.selectWeek
         }
         this.historicalRecordsService.executeHttp(this.apiUrl[0], data)
             .then((result: any) => {
