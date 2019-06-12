@@ -20,6 +20,7 @@ export class HistoricalRecordsComponent implements OnInit {
     apiUrl = [
         'http://www.mrzhao14.cn/LabManager/class/lab/getClassByLabIdAndSemesterAndWeek', /*0获取课程*/
         'http://www.mrzhao14.cn/LabManager/semester/getNowSemester', // 1
+        'http://www.mrzhao14.cn/LabManager/user/getUserByUserName', // 2
     ];
 
     WEEK = ['日', '一', '二', '三', '四', '五', '六', '日'];
@@ -78,7 +79,19 @@ export class HistoricalRecordsComponent implements OnInit {
         }
         this.historicalRecordsService.executeHttp(this.apiUrl[0], data)
             .then((result: any) => {
-                this.courses = JSON.parse(result['_body'])['course'];
+                const data = JSON.parse(result['_body'])['course'];
+                for (let i of data) {
+                    i.expand = false;
+                    // 获取教师信息
+                    this.historicalRecordsService.executeHttp(this.apiUrl[2], {userName: i.userName})
+                        .then((res: any) => {
+                            let temp = JSON.parse(res['_body'])['User1'];
+                            i.userNickname = temp.userNickname;
+                            i.email = temp.email;
+                            i.phone = temp.phone;
+                        });
+                }
+                this.courses = data;
             });
     }
     onSearch(event: string): void {

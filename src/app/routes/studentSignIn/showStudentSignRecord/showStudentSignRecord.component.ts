@@ -47,7 +47,6 @@ export class ShowStudentSignRecordComponent implements OnInit {
             });
     }
     private _getData = () => {
-        this.Flag = this._storage.get('historyOrThisWeek');
         // 获取当前学期信息
         this.getSemester();
         // 获取课程c
