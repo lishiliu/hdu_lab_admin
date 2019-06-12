@@ -87,7 +87,7 @@ export class StudentSignInComponent implements OnInit {
     showRecords(data: any) {
         const str = JSON.stringify(data);
         this._storage.set('signInCourse', str);
-        this._storage.set('historyOrThisWeek', 0);
+        this._storage.set('historyOrThisWeek', '0');
         this._storage.set('thisWeek', this.thisWeek);
         this.router.navigate(['/studentSignIn/show']);
     }

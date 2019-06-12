@@ -52,10 +52,10 @@ export class ShowStudentSignRecordComponent implements OnInit {
         // 获取课程c
         this.signInCourse = JSON.parse(this._storage.get('signInCourse'));
         const flag = this._storage.get('historyOrThisWeek');
-        if(flag==0){
+        if(flag=='0'){
             this.week = this._storage.get('thisWeek');
         }
-        if(flag==1){
+        if(flag=='1'){
             this.week = this._storage.get('selectWeek');
             this.searchFlag = true;
         }

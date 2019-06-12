@@ -65,7 +65,7 @@ export class HistoricalRecordsComponent implements OnInit {
     showHistoryRecords(data: any) {
         const str = JSON.stringify(data);
         this._storage.set('signInCourse', str);
-        this._storage.set('historyOrThisWeek', 1);
+        this._storage.set('historyOrThisWeek', '1');
         this.router.navigate(['/studentSignIn/show']);
     }
     private _getData = () => {
