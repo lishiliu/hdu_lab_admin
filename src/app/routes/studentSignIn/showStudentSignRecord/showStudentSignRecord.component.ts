@@ -18,9 +18,9 @@ export class ShowStudentSignRecordComponent implements OnInit {
     }
     validateForm: FormGroup;
     apiUrl = [
-        'http://localhost:8080/LabManager/semester/getNowSemester',
-        'http://localhost:8080/LabManager/studentSignIn/getSignRecordToTeacherByWeek', /*1获取签到信息*/
-        'http://localhost:8080/LabManager/studentSignIn/getSignCountToTeacher', /*2获取签到人数信息*/
+        'http://www.mrzhao14.cn/LabManager/semester/getNowSemester',
+        'http://www.mrzhao14.cn/LabManager/studentSignIn/getSignRecordToTeacherByWeek', /*1获取签到信息*/
+        'http://www.mrzhao14.cn/LabManager/studentSignIn/getSignCountToTeacher', /*2获取签到人数信息*/
         // 1
     ];
 
