@@ -38,7 +38,13 @@ export class SiderComponent {
       'icon': 'database',
       'name': '学生签到管理',
       'route': '/studentSignIn'
-    }];
+    },
+    {
+      'icon': 'bulb',
+      'name': '设备管理',
+      'route': '/computer'
+    }
+    ];
 
   constructor(public settings: SettingsService, private menuService: MenuService) {
     this.theme = this.settings.layout.isDark;

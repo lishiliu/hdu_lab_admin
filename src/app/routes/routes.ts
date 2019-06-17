@@ -16,6 +16,9 @@ import {StudentSignInComponent} from './studentSignIn/studentSignIn.component';
 import {HistoricalRecordsComponent} from './studentSignIn/historicalRecords/historicalRecords.component';
 import {AddStudentComponent} from './studentSignIn/addStudent/addStudent.component';
 import {ShowStudentSignRecordComponent} from './studentSignIn/showStudentSignRecord/showStudentSignRecord.component';
+import {ComputerComponent} from './computer/computer.component';
+import {AddComputerComponent} from './computer/addComputer/addComputer.component';
+import {EditComputerComponent} from './computer/editComputer/editComputer.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent, canLoad: [CanAuthProvide]},
@@ -66,7 +69,8 @@ export const routes: Routes = [
                 data: {
                     breadcrumb: '密码修改'
                 }
-            }, {
+            },
+            {
                 path: 'studentSignIn', component: StudentSignInComponent, canActivate: [CanAuthProvide],
                 data: {
                     breadcrumb: '学生签到管理'
@@ -88,6 +92,24 @@ export const routes: Routes = [
                 path: 'studentSignIn/show', component: ShowStudentSignRecordComponent, canActivate: [CanAuthProvide],
                 data: {
                     breadcrumb: '查看签到记录'
+                }
+            },
+            {
+                path: 'computer', component: ComputerComponent, canActivate: [CanAuthProvide],
+                data: {
+                    breadcrumb: '设备管理'
+                }
+            },
+            {
+                path: 'computer/add', component: AddComputerComponent, canActivate: [CanAuthProvide],
+                data: {
+                    breadcrumb: '添加设备'
+                }
+            },
+            {
+                path: 'computer/edit', component: EditComputerComponent, canActivate: [CanAuthProvide],
+                data: {
+                    breadcrumb: '编辑设备'
                 }
             },
             {path: '', redirectTo: 'index', pathMatch: 'full'}
