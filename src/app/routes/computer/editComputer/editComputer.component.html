@@ -1,12 +1,13 @@
 <div nz-row>
     <div nz-col>
-        <h1>编辑课程</h1>
+        <h1>编辑设备</h1>
     </div>
 </div>
 <br>
 <div nz-row>
     <div nz-col>
         <p>当前学期：{{nowSemester.nowSemester}}</p>
+        <p>当前实验室：<span>{{labName}}</span></p>
     </div>
 </div>
 <br><br><br>
@@ -21,126 +22,75 @@
                 <div nz-col nzSpan="16">
                     <nz-alert [nzType]="'warning'" nzShowIcon>
                           <span alert-body>
-                            <pre style="font-size: 1.4em;color: red">请输入教务系统中的该课程的信息,谢谢.</pre>
+                            <pre style="font-size: 1.4em;color: red">请如实填写设备信息.</pre>
                           </span>
                     </nz-alert>
                 </div>
             </div>
         </div>
         <div class="formItem" nz-form-item>
-            <div nz-form-control [nzValidateStatus]="validateForm.controls.classId"  [nzValidateStatus]="getFormControl('classId')"  nzHasFeedback >
-                <label for="classId" nz-col nzSpan="10">课程号：</label>
-                <div nz-col nzSpan="12">
-                    <input nz-input id="classId" formControlName="classId" [(ngModel)]="_course.classId">
+            <div nz-form-control [nzValidateStatus]="validateForm.controls.computerIp"  [nzValidateStatus]="getFormControl('computerIp')"  nzHasFeedback >
+                <label for="computerIp" nz-col nzSpan="7">设备IP：</label>
+                <div nz-col nzSpan="15">
+                    <input nz-input id="computerIp" formControlName="computerIp" [(ngModel)]="computerInfo.computerIp">
                 </div>
                 <div class="help">
-                    <div nz-col nzSpan="12" [nzOffset]="'10'" nz-form-explain *ngIf="validateForm.controls.classId.dirty&&validateForm.controls.classId.hasError('required')">课程号为必选项！</div>
+                    <div nz-col nzSpan="12" [nzOffset]="'7'" nz-form-explain *ngIf="validateForm.controls.computerIp.dirty&&validateForm.controls.computerIp.hasError('required')">设备IP为必填项！</div>
                 </div>
             </div>
         </div>
         <div class="formItem" nz-form-item>
-            <div nz-form-control [nzValidateStatus]="validateForm.controls.className"  [nzValidateStatus]="getFormControl('className')"  nzHasFeedback >
-                <label for="className" nz-col nzSpan="10">课程名称：</label>
-                <div nz-col nzSpan="12">
-                    <input nz-input id="className" formControlName="className" [ngModel]="_course.className">
+            <div nz-form-control [nzValidateStatus]="validateForm.controls.computerNum"  [nzValidateStatus]="getFormControl('computerNum')"  nzHasFeedback >
+                <label for="computerNum" nz-col nzSpan="7">座位编号：</label>
+                <div nz-col nzSpan="15">
+                    <nz-input id="computerNum" formControlName="computerNum" [(ngModel)]="computerInfo.computerNum"></nz-input>
                 </div>
                 <div class="help">
-                    <div nz-col nzSpan="12" [nzOffset]="'10'" nz-form-explain *ngIf="validateForm.controls.className.dirty&&validateForm.controls.className.hasError('required')">课程名为必选项！</div>
+                    <div nz-col nzSpan="12" [nzOffset]="'7'" nz-form-explain *ngIf="validateForm.controls.computerNum.dirty&&validateForm.controls.computerNum.hasError('required')">座位编号为必填项！</div>
                 </div>
             </div>
         </div>
         <div class="formItem" nz-form-item>
-            <div nz-form-control  [nzValidateStatus]="getFormControl('week')"  nzHasFeedback >
-                <label for="week" nz-col nzSpan="10">课程周次（可多选）：</label>
-                <div nz-col nzSpan="12">
-                    <nz-select
-                            nzMode="multiple"
-                            id="week"
-                            formControlName="week"
-                            [(ngModel)]="_course.classWeek"
-                            [nzPlaceHolder]="'请选择周数'"
-                    >
-                        <nz-option
-                                *ngFor="let option of week"
-                                [nzLabel]="option.label"
-                                [nzValue]="option.value">
-                        </nz-option>
-                    </nz-select>
-                </div>
-                <div nz-col nzSpan="12" [nzOffset]="'10'">
-                    <nz-button-group style="float: right">
-                        <button type="button" nz-button [nzType]="'defaut'" (click)="setWeek('week',0)">全选</button>
-                        <button type="button" nz-button [nzType]="'defaut'" (click)="setWeek('week',1)">单周</button>
-                        <button type="button" nz-button [nzType]="'defaut'" (click)="setWeek('week',2)">双周</button>
-                        <button type="button" nz-button [nzType]="'defaut'" (click)="setWeek('week',3)">重置</button>
-                    </nz-button-group>
+            <div nz-form-control [nzValidateStatus]="validateForm.controls.software"  [nzValidateStatus]="getFormControl('software')"  nzHasFeedback >
+                <label for="software" nz-col nzSpan="7">内置软件：</label>
+                <div nz-col nzSpan="15">
+                    <nz-input id="software" formControlName="software" [(ngModel)]="computerInfo.software" ></nz-input>
                 </div>
                 <div class="help">
-                    <div nz-col nzSpan="12" [nzOffset]="'10'" nz-form-explain *ngIf="validateForm.controls.week.dirty&&validateForm.controls.week.hasError('required')">周数为必选项！</div>
+                    <div nz-col nzSpan="12" [nzOffset]="'7'" nz-form-explain *ngIf="validateForm.controls.software.dirty&&validateForm.controls.software.hasError('required')">设备内置软件为必填项！</div>
                 </div>
             </div>
         </div>
         <div class="formItem" nz-form-item>
-            <div nz-form-control [nzValidateStatus]="validateForm.controls.weekday&&validateForm.controls.classNum"  [nzValidateStatus]="getFormControl('weekday')&&getFormControl('classNum')"  nzHasFeedback >
-                <label for="weekday" nz-col nzSpan="10">课程时间（可多选）：</label>
-                <div nz-col nzSpan="12">
-                    <nz-input-group nz-col nzSpan="24" [nzSize]="'large'" nzCompact>
-                        <nz-select
-                                style="width:50%"
-                                id="weekday"
-                                formControlName="weekday"
-                                [nzPlaceHolder]="'星期 '"
-                                [(ngModel)]="_course.weekDays[0]"
-                                nzShowSearch="true"
-                        >
-                            <nz-option
-                                    *ngFor="let option of weekday"
-                                    [nzLabel]="option.label"
-                                    [nzValue]="option.value">
-                            </nz-option>
-                        </nz-select>
-                        <nz-select
-                                nzMode="multiple"
-                                style="width:50%"
-                                id="classNum"
-                                [nzPlaceHolder]="'第 节'"
-                                formControlName="classNum"
-                                [(ngModel)]="_course.classNum"
-                                nzShowSearch="true">
-                            <nz-option
-                                    *ngFor="let option of classNum"
-                                    [nzLabel]="option.label"
-                                    [nzValue]="option.value">
-                            </nz-option>
-                        </nz-select>
-                    </nz-input-group>
-                </div>
-                <div nz-col nzSpan="12" [nzOffset]="'10'">
-                    <button type="button" nz-button [nzType]="'defaut'" (click)="setWeek('weekday',3);setWeek('classNum',3);" style="float: right;">重置时间</button>
+            <div nz-form-control [nzValidateStatus]="validateForm.controls.systemType"  [nzValidateStatus]="getFormControl('systemType')"  nzHasFeedback >
+                <label for="systemType" nz-col nzSpan="7">操作系统：</label>
+                <div nz-col nzSpan="15">
+                    <nz-input id="systemType" formControlName="systemType" [(ngModel)]="computerInfo.systemType" ></nz-input>
                 </div>
                 <div class="help">
-                    <div nz-col nzSpan="12" [nzOffset]="'10'" nz-form-explain *ngIf="validateForm.controls.weekday.dirty&&validateForm.controls.weekday.hasError('required')&&validateForm.controls.classNum.dirty&&validateForm.controls.classNum.hasError('required')">上课时间为必选项！</div>
+                    <div nz-col nzSpan="12" [nzOffset]="'7'" nz-form-explain *ngIf="validateForm.controls.systemType.dirty&&validateForm.controls.systemType.hasError('required')">操作系统为必填项！</div>
                 </div>
             </div>
         </div>
         <div class="formItem" nz-form-item>
-            <div nz-form-control [nzValidateStatus]="validateForm.controls.classPeoCount"  [nzValidateStatus]="getFormControl('classPeoCount')"  nzHasFeedback >
-                <label for="classPeoCount" nz-col nzSpan="10">人数：</label>
-                <div nz-col nzSpan="12">
-                    <nz-input-number  [nzMin]="1"  [nzStep]="1" id="classPeoCount" [formControlName]="'classPeoCount'" [ngModel]="_course.classPeoCount"></nz-input-number>
+            <div nz-form-control [nzValidateStatus]="validateForm.controls.computerType"  [nzValidateStatus]="getFormControl('computerType')"  nzHasFeedback >
+                <label for="computerType" nz-col nzSpan="7">设备类型：</label>
+                <div nz-col nzSpan="15">
+                    <nz-input id="computerType" formControlName="computerType" [(ngModel)]="computerInfo.type"></nz-input>
                 </div>
                 <div class="help">
-                    <div nz-col nzSpan="12" [nzOffset]="'10'" nz-form-explain *ngIf="validateForm.controls.classPeoCount.dirty&&validateForm.controls.classPeoCount.hasError('required')">人数为必填项！</div>
+                    <div nz-col nzSpan="12" [nzOffset]="'7'" nz-form-explain *ngIf="validateForm.controls.computerType.dirty&&validateForm.controls.computerType.hasError('required')">设备类型为必填项！</div>
                 </div>
             </div>
         </div>
         <div class="submitBtn" nz-form-item nz-col nzSpan="22">
             <div nz-form-control>
-                <button nz-button [nzType]="'danger'" [nzSize]="'large'" (click)="_back()">
+                <button nz-button [nzType]="'danger'" [nzSize]="'large'" type="reset" onclick="window.history.back()">
                     <span>取消</span>
                 </button>
-                <button nz-button [nzLoading]="loadStatus" [nzType]="'primary'" [nzSize]="'large'" (click)="_submitForm()">{{submitBtn}}</button>
-
+                <nz-popconfirm [nzTitle]="'确定提交吗？'" (nzOnConfirm)="_submitForm()" (nzOnCancel)="null">
+                    <button nz-button nz-popconfirm [nzLoading]="loadStatus" [nzType]="'primary'" [nzSize]="'large'" >{{submitBtn}}</button>
+                </nz-popconfirm>
             </div>
         </div>
     </form>
