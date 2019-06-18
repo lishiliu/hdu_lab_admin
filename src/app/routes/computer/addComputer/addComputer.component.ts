@@ -18,77 +18,23 @@ export class AddComputerComponent implements OnInit {
     loadStatus: boolean;
     submitBtn = '提交';
     curl = [
-        'class/addclass', // 0 添加课程
+        'computer/addComputer', // 0 添加课程
         'semester/getNowSemester', // 1获取当前学期
         'lab/getLabById', /*2 获取实验室*/
     ];
     constructor(private _storage: SessionStorageService, private fb: FormBuilder, private router: Router,
                 private addcourseService: AddComputerService, private confirmServ: NzModalService) {
     }
-    week = [];
-    weekday = [{ value: 1, label: '星期一' },
-        { value: 2, label: '星期二' },
-        { value: 3, label: '星期三' },
-        { value: 4, label: '星期四' },
-        { value: 5, label: '星期五' },
-        { value: 6, label: '星期六' },
-        { value: 7, label: '星期日' }
-    ];
-    classNum = [{ value: 1, label: '第1节' },
-        { value: 2, label: '第2节' },
-        { value: 3, label: '第3节' },
-        { value: 4, label: '第4节' },
-        { value: 5, label: '第5节' },
-        { value: 6, label: '第6节' },
-        { value: 7, label: '第7节' },
-        { value: 8, label: '第8节' },
-        { value: 9, label: '第9节' },
-        { value: 10, label: '第10节' },
-        { value: 11, label: '第11节' },
-        { value: 12, label: '第12节' },
-    ];
     nowSemester = {
         nowSemester: '',
         maxWeek: 17
     };
     labName;
-    private setInitWeek() {
-        for (let i = 0; i < 30; i++) {
-            this.week[i] = {value : i + 1, label: (i + 1).toString()};
-        }
-        console.log(this.week);
-    }
-    /*//控制全选单双重置*/
-    setWeek = (target, operation) => {
-        this.validateForm.controls[target].reset();
-        if (operation == 0) {
-            let c = this.validateForm.value;
-            c.week = this.week;
-            this.validateForm.setValue(c);
-        }
-        if(operation==1){
-            let c = this.validateForm.value;
-            c.week = [];
-            for(let i=0;i< this.week.length;i++){
-                if(i%2==0){
-                    c.week.push(this.week[i]);
-                }
-            }
-            this.validateForm.setValue(c);
-        }
-        if(operation==2){
-            let c = this.validateForm.value;
-            c.week = [];
-            for(let i=0;i< this.week.length;i++){
-                if(i%2){
-                    c.week.push(this.week[i]);
-                }
-            }
-            this.validateForm.setValue(c);
-        }
-    };
-    //控制全选单双重置
-
+   /* computerIp;
+    computerNum;
+    software;
+    systemType;
+    computerType;*/
     getFormControl(name) {
         return this.validateForm.controls[name];
     }
@@ -107,43 +53,38 @@ export class AddComputerComponent implements OnInit {
         const Route = this.router;
         setTimeout(function () {
             modal.destroy();
-            Route.navigate(['/courses']);
+            Route.navigate(['/computer']);
         }, 1000);
     }
     _submitForm() {
-        let classId = '', className = '', weektemp = [], weekdaytemp = [], classNumtemp = [], classPeoCount = '';
-        classId = this.validateForm.controls['classId'].value;
-        for (let j = 0; j < this.validateForm.controls['week'].value.length; j++) {
-            weektemp.push(this.validateForm.controls['week'].value[j].value);
-        }
-        for (let j = 0; j < this.validateForm.controls['classNum'].value.length; j++) {
-            classNumtemp.push(this.validateForm.controls['classNum'].value[j].value);
-        }
-        weekdaytemp[0] = this.validateForm.controls['weekday'].value.value;
-        className = this.validateForm.controls['className'].value;
-        classPeoCount = this.validateForm.controls['classPeoCount'].value;
+        let computerIp = '', computerNum = '', software = '', systemType = '', computerType = '';
+        computerIp = this.validateForm.controls['computerIp'].value;
+        computerNum = this.validateForm.controls['computerNum'].value;
+        software = this.validateForm.controls['software'].value;
+        systemType = this.validateForm.controls['systemType'].value;
+        computerType = this.validateForm.controls['computerType'].value;
         const data = {
-            userName: this._storage.get('username'),
-            classId: classId,
-            className: className, // 课程
-            classWeek: weektemp, // 周数
-            weekDays: weekdaytemp, // 星期几
-            classNum: classNumtemp, // 第几节
-            classPeoCount: classPeoCount
+            labId: this._storage.get('labId'),
+            computerIp: computerIp, // IP
+            computerNum: computerNum, // 座号
+            software: software, // 软件
+            systemType: systemType, // 操作系统类型
+            type: computerType // 设备类型
         };
         this.addcourseService.executeHttp(this.curl[0], data)
             .then((result: any) => {
                 const res = JSON.parse(result['_body']);
-                if (res['result'] === 1) {
+                if (res['result'] === 'success') {
                     this.success();
+                } else if (res['result'] === 'repeat') {
+                    this.info('警告', res['msg'] );
                 } else {
-                    this.info('警告', '添加失败,请检查后重试！');
+                    this.info('警告', '添加失败');
                     return;
                 }
             });
     }
     private getData() {
-        this.setInitWeek();
         // 获取学期
         this.addcourseService.executeGET(this.curl[1])
             .then((result: any) => {
@@ -161,12 +102,11 @@ export class AddComputerComponent implements OnInit {
     ngOnInit() {
         this.getData();
         this.validateForm = this.fb.group({
-            classId: [null, [Validators.required]],
-            className: [null, [Validators.required]],
-            week: [null, [Validators.required]],
-            weekday: [null, [Validators.required]],
-            classNum: [null, [Validators.required]],
-            classPeoCount: [null, [Validators.required]],
+            computerIp: [null, [Validators.required]],
+            computerNum: [null, [Validators.required]],
+            software: [null, [Validators.required]],
+            systemType: [null, [Validators.required]],
+            computerType: [null, [Validators.required]],
         });
     }
 }
